@@ -1,16 +1,8 @@
-/*
-  Warnings:
-
-  - You are about to drop the `user` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropTable
-DROP TABLE `user`;
-
 -- CreateTable
 CREATE TABLE `users` (
-    `id` VARCHAR(191) NOT NULL,
+    `id` VARCHAR(30) NOT NULL,
     `email` VARCHAR(191) NOT NULL,
+    `password` TEXT NOT NULL,
     `first_name` VARCHAR(191) NULL,
     `last_name` VARCHAR(191) NULL,
     `image_url` VARCHAR(191) NULL,
@@ -25,8 +17,8 @@ CREATE TABLE `users` (
 
 -- CreateTable
 CREATE TABLE `categories` (
-    `id` VARCHAR(191) NOT NULL,
-    `user_id` VARCHAR(191) NOT NULL,
+    `id` VARCHAR(30) NOT NULL,
+    `user_id` VARCHAR(30) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `description` VARCHAR(191) NULL,
     `icon` VARCHAR(191) NULL,
@@ -40,8 +32,8 @@ CREATE TABLE `categories` (
 
 -- CreateTable
 CREATE TABLE `tracking_periods` (
-    `id` VARCHAR(191) NOT NULL,
-    `user_id` VARCHAR(191) NOT NULL,
+    `id` VARCHAR(30) NOT NULL,
+    `user_id` VARCHAR(30) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `type` VARCHAR(191) NOT NULL,
     `start_date` DATETIME(3) NOT NULL,
@@ -54,9 +46,9 @@ CREATE TABLE `tracking_periods` (
 
 -- CreateTable
 CREATE TABLE `budgets` (
-    `id` VARCHAR(191) NOT NULL,
-    `tracking_period_id` VARCHAR(191) NOT NULL,
-    `category_id` VARCHAR(191) NOT NULL,
+    `id` VARCHAR(30) NOT NULL,
+    `tracking_period_id` VARCHAR(30) NOT NULL,
+    `category_id` VARCHAR(30) NOT NULL,
     `max_amount` DECIMAL(10, 2) NOT NULL,
     `is_recurrent` BOOLEAN NOT NULL DEFAULT false,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
@@ -67,8 +59,8 @@ CREATE TABLE `budgets` (
 
 -- CreateTable
 CREATE TABLE `spendings` (
-    `id` VARCHAR(191) NOT NULL,
-    `budget_id` VARCHAR(191) NOT NULL,
+    `id` VARCHAR(30) NOT NULL,
+    `budget_id` VARCHAR(30) NOT NULL,
     `amount` DECIMAL(10, 2) NOT NULL,
     `spending_date` DATETIME(3) NOT NULL,
     `note` TEXT NULL,
@@ -79,8 +71,8 @@ CREATE TABLE `spendings` (
 
 -- CreateTable
 CREATE TABLE `incomes` (
-    `id` VARCHAR(191) NOT NULL,
-    `user_id` VARCHAR(191) NOT NULL,
+    `id` VARCHAR(30) NOT NULL,
+    `user_id` VARCHAR(30) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `type` VARCHAR(191) NOT NULL,
     `amount` DECIMAL(10, 2) NOT NULL,

@@ -14,7 +14,7 @@ export const loginUser = async (email: string, password: string) => {
   const token = jwt.sign(
     { userId: user.id },
     process.env.JWT_SECRET as string,
-    { expiresIn: parseInt(process.env.JWT_EXPIRES_IN as string) }
+    { expiresIn: parseInt(process.env.JWT_EXPIRES_IN as string) },
   );
 
   // const token = jwt.sign(
@@ -26,16 +26,17 @@ export const loginUser = async (email: string, password: string) => {
   return { token };
 };
 
-
 export const registerUser = async (email: string, password: string) => {
+  if (!password) {
+    throw new Error("Password is required");
+  }
+
   const hashedPassword = await hashPassword(password);
 
-  const user = await prisma.user.create({
+  return prisma.user.create({
     data: {
       email,
       password: hashedPassword,
     },
   });
-
-  return user;
 };
