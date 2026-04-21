@@ -10,16 +10,7 @@ export const register = async (
 ) => {
   try {
     logger.info("Register attempt");
-
-    const { email, password } = req.body;
-
-    if (!email || !password) {
-      return res.status(400).json({
-        message: "Email and password are required",
-      });
-    }
-
-    const user = await registerUser(email, password);
+    const user = await registerUser(req.body);
 
     logger.info("User created successfully");
 
@@ -44,11 +35,7 @@ export const login = async (
   try {
     const { email, password } = req.body;
 
-    if (!email || !password) {
-      return res.status(400).json({
-        message: "Email and password are required",
-      });
-    }
+    logger.info(`Login attempt for email: ${email}`);
 
     const { token } = await loginUser(email, password);
 
